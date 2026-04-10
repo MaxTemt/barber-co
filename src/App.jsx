@@ -1,5 +1,5 @@
 import { useState, useEffect, useReducer } from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { HashRouter as Router, Routes, Route } from 'react-router-dom'
 import Header from './components/Header/Header'
 import Hero from './components/Hero/Hero'
 import Services from './components/Services/Services'
