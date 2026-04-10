@@ -1,0 +1,224 @@
+@import '../../styles/variables';
+
+.booking {
+  background: $graphite;
+  
+  .container {
+    @include container;
+  }
+  
+  &__title {
+    font-family: $font-headings;
+    font-weight: 700;
+    font-size: 40px;
+    color: $text-light;
+    text-align: center;
+    margin: 0 0 10px 0;
+    
+    @include mobile {
+      font-size: 32px;
+    }
+  }
+  
+  &__subtitle {
+    font-size: 18px;
+    color: $text-dark;
+    text-align: center;
+    margin: 0 0 40px 0;
+  }
+  
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    
+    @include mobile {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  &__calculator,
+  &__form {
+    background: rgba(36, 36, 36, 0.5);
+    border-radius: 24px;
+    padding: 30px;
+  }
+  
+  &__field {
+    margin-bottom: 20px;
+  }
+  
+  &__label {
+    display: block;
+    font-family: $font-primary;
+    font-weight: 500;
+    font-size: 14px;
+    color: $text-dark;
+    margin-bottom: 8px;
+  }
+  
+  &__select,
+  &__input,
+  &__datepicker {
+    width: 100%;
+    padding: 12px 16px;
+    background: $dark-bg;
+    border: 1px solid $border-light;
+    border-radius: 12px;
+    color: $text-light;
+    font-family: $font-primary;
+    font-size: 16px;
+    @include transition-default;
+    
+    &:focus {
+      outline: none;
+      border-color: $brass;
+      box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.1);
+    }
+    
+    &--error {
+      border-color: $error-red;
+      
+      &:focus {
+        box-shadow: 0 0 0 3px rgba(255, 68, 68, 0.1);
+      }
+    }
+  }
+  
+  &__select {
+    cursor: pointer;
+    
+    option {
+      background: $dark-bg;
+      color: $text-light;
+    }
+  }
+  
+  &__error {
+    display: block;
+    font-size: 12px;
+    color: $error-red;
+    margin-top: 5px;
+  }
+  
+  &__addons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  &__addon {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    color: $text-dark;
+    
+    input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: $brass;
+      cursor: pointer;
+    }
+  }
+  
+  &__total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-top: 1px solid $border-light;
+    margin-top: 20px;
+    
+    &-label {
+      font-size: 18px;
+      color: $text-dark;
+    }
+    
+    &-price {
+      font-family: $font-primary;
+      font-weight: 700;
+      font-size: 32px;
+      color: $amber;
+    }
+  }
+  
+  &__submit {
+    width: 100%;
+    padding: 14px;
+    background: $btn-green;
+    color: $text-light;
+    border-radius: 30px;
+    font-family: $font-primary;
+    font-weight: 600;
+    font-size: 18px;
+    cursor: pointer;
+    @include transition-default;
+    
+    &:hover:not(:disabled) {
+      background: $btn-green-hover;
+      transform: scale(1.02);
+    }
+    
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+}
+
+// Flatpickr overrides
+.flatpickr-calendar {
+  background: $dark-bg !important;
+  border: 1px solid $border-light !important;
+  box-shadow: $shadow-default !important;
+}
+
+.flatpickr-day {
+  color: $text-light !important;
+  
+  &:hover {
+    background: $brass !important;
+    border-color: $brass !important;
+  }
+  
+  &.selected {
+    background: $dark-red-btn !important;
+    border-color: $dark-red-btn !important;
+    
+    &:hover {
+      background: $dark-red-hover !important;
+    }
+  }
+  
+  &.today {
+    border-color: $brass !important;
+  }
+}
+
+.flatpickr-months {
+  .flatpickr-month {
+    background: $dark-bg !important;
+    color: $text-light !important;
+  }
+  
+  .flatpickr-prev-month,
+  .flatpickr-next-month {
+    fill: $text-light !important;
+    
+    &:hover svg {
+      fill: $brass !important;
+    }
+  }
+}
+
+span.flatpickr-weekday {
+  color: $text-dark !important;
+}
+
+.flatpickr-time {
+  input {
+    color: $text-light !important;
+  }
+}

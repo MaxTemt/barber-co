@@ -1,0 +1,80 @@
+@import '../../styles/variables';
+
+.faq {
+  background: $dark-bg;
+  
+  .container {
+    @include container;
+    max-width: 800px;
+  }
+  
+  &__title {
+    font-family: $font-headings;
+    font-weight: 700;
+    font-size: 40px;
+    color: $text-light;
+    text-align: center;
+    margin: 0 0 40px 0;
+    
+    @include mobile {
+      font-size: 32px;
+    }
+  }
+  
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+.faq-item {
+  background: $card-bg;
+  border-radius: 16px;
+  overflow: hidden;
+  
+  &__question {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    font-family: $font-primary;
+    font-weight: 600;
+    font-size: 20px;
+    color: $text-light;
+    text-align: left;
+    cursor: pointer;
+    @include transition-default;
+    
+    &:hover {
+      color: $amber;
+    }
+  }
+  
+  &__arrow {
+    flex-shrink: 0;
+    @include transition-default;
+    
+    &--open {
+      transform: rotate(180deg);
+    }
+  }
+  
+  &__answer {
+    max-height: 0;
+    overflow: hidden;
+    @include transition-default;
+    
+    &--open {
+      max-height: 300px;
+    }
+    
+    p {
+      padding: 0 20px 20px;
+      font-size: 16px;
+      color: $text-dark;
+      line-height: 1.6;
+    }
+  }
+}

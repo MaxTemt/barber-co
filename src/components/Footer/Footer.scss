@@ -1,0 +1,135 @@
+@import '../../styles/variables';
+
+.footer {
+  background: #111111;
+  padding: 40px 20px;
+  
+  .container {
+    max-width: $container-max;
+    margin: 0 auto;
+  }
+  
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    
+    @include tablet {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @include mobile {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  &__column-title {
+    font-family: $font-primary;
+    font-weight: 600;
+    font-size: 18px;
+    color: $text-light;
+    margin-bottom: 15px;
+  }
+  
+  &__list {
+    list-style: none;
+    
+    li {
+      margin-bottom: 10px;
+    }
+  }
+  
+  &__link {
+    font-size: 16px;
+    color: $text-dark;
+    @include transition-default;
+    
+    &:hover {
+      color: $brass;
+      text-decoration: underline;
+    }
+  }
+  
+  &__socials {
+    display: flex;
+    gap: 15px;
+  }
+  
+  &__social {
+    @include transition-default;
+    
+    &:hover {
+      transform: scale(1.1);
+      
+      svg {
+        fill: $brass;
+        stroke: $brass;
+      }
+    }
+  }
+  
+  &__map {
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    
+    iframe {
+      width: 100%;
+      height: 120px;
+      border: none;
+    }
+  }
+  
+  &__address {
+    font-size: 14px;
+    color: $text-dark;
+  }
+  
+  &__theme-toggle {
+    margin-top: 15px;
+    padding: 8px 16px;
+    background: $card-bg;
+    color: $text-dark;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    @include transition-default;
+    
+    &:hover {
+      background: $border-light;
+      color: $text-light;
+    }
+  }
+  
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid $border-light;
+    
+    p {
+      font-size: 14px;
+      color: $text-dark;
+    }
+  }
+  
+  &__to-top {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $card-bg;
+    border-radius: 50%;
+    color: $text-dark;
+    cursor: pointer;
+    @include transition-default;
+    
+    &:hover {
+      background: $brass;
+      color: $dark-bg;
+    }
+  }
+}
