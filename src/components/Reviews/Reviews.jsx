@@ -1,16 +1,13 @@
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Pagination } from 'swiper/modules'
-import 'swiper/css'
-import 'swiper/css/navigation'
-import 'swiper/css/pagination'
 import './Reviews.scss'
 import { reviews } from '../../utils/data'
 
 function Stars({ rating }) {
   return (
-    <div className="review-card__stars">
+    <div className="stars">
       {[...Array(5)].map((_, i) => (
-        <span key={i} className={`star ${i < rating ? 'star--active' : ''}`}>★</span>
+        <svg key={i} width="16" height="16" viewBox="0 0 16 16" fill={i < rating ? '#c8a96e' : '#333'}>
+          <path d="M8 0l2.5 5 5.5.8-4 3.9.9 5.3L8 12.5 3.1 15l.9-5.3-4-3.9L5.5 5z"/>
+        </svg>
       ))}
     </div>
   )
@@ -20,65 +17,42 @@ function Reviews() {
   return (
     <section id="reviews" className="reviews scroll-offset">
       <div className="container">
-        <h2 className="reviews__title">Отзывы клиентов</h2>
-        <p className="reviews__subtitle">Нам доверяют более 2500 клиентов</p>
+        <header className="reviews__header">
+          <span className="section-label">Отзывы</span>
+          <h2 className="section-title">Что говорят клиенты</h2>
+        </header>
 
-        <Swiper
-          modules={[Navigation, Pagination]}
-          spaceBetween={30}
-          slidesPerView={3}
-          navigation
-          pagination={{ clickable: true }}
-          breakpoints={{
-            320: { slidesPerView: 1 },
-            768: { slidesPerView: 2 },
-            1200: { slidesPerView: 3 }
-          }}
-          className="reviews__swiper"
-        >
-          {reviews.map(review => (
-            <SwiperSlide key={review.id}>
-              <div className="review-card">
-                <div className="review-card__header">
-                  <img
-                    src={review.avatar}
-                    alt={review.name}
-                    className="review-card__avatar"
-                    loading="lazy"
-                  />
-                  <div className="review-card__info">
-                    <h4 className="review-card__name">{review.name}</h4>
-                    <span className="review-card__date">{review.date}</span>
-                  </div>
-                </div>
-
-                <Stars rating={review.rating} />
-
-                <p className="review-card__comment">{review.comment}</p>
-
-                <div className="review-card__actions">
-                  <button className="review-card__like" aria-label="Нравится">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                      <path d="M14 9V5a3 3 0 00-3-3l-4 9v11h11.28a2 2 0 002-1.7l1.38-9a2 2 0 00-2-2.3H14z" stroke="#444" strokeWidth="2"/>
-                    </svg>
-                  </button>
+        <div className="reviews__grid">
+          {reviews.map((review, i) => (
+            <div
+              key={review.id}
+              className="review-card"
+              style={{ animationDelay: `${i * 0.1}s` }}
+            >
+              <div className="review-card__top">
+                <img src={review.avatar} alt={review.name} className="review-card__avatar" loading="lazy" />
+                <div className="review-card__info">
+                  <h4 className="review-card__name">{review.name}</h4>
+                  <p className="review-card__date">{review.date}</p>
                 </div>
               </div>
-            </SwiperSlide>
+              <Stars rating={review.rating} />
+              <p className="review-card__comment">{review.comment}</p>
+            </div>
           ))}
-        </Swiper>
+        </div>
 
-        <div className="reviews__telegram">
+        <div className="reviews__cta">
           <a
-            href="https://t.me/barberco_bot?start=review"
+            href="https://t.me/barberco"
             target="_blank"
             rel="noopener noreferrer"
-            className="reviews__telegram-btn"
+            className="btn btn--ghost btn--md"
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff">
-              <path d="M21.2 4.4L2.4 11.5c-.6.2-.6.8 0 1l4.8 1.5 1.8 5.8c.1.4.6.5.9.2l2.6-2.6 5.1 3.8c.5.3 1.1.1 1.2-.5L22.6 5.4c.2-.7-.4-1.3-1.4-1zM9.6 13.4l-.4 4.2-1.3-4.2L18.2 7 9.6 13.4z"/>
-            </svg>
             Оставить отзыв в Telegram
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M21.2 4.4L2.4 11.7c-1.1.4-1.1 1.1-.2 1.4l4.8 1.5 1.9 5.8c.2.6.9.6 1.2.1l2.7-2.2 5.1 3.8c.9.5 1.6.1 1.8-.8l3.4-15.6c.4-1.7-.6-2.5-1.9-1.3zM9.6 14.5l-.4 4.2-1.8-5.6L18.6 7.2c.3-.2.1-.3-.2-.2L7.6 12.8l-4-1.3L20.4 5.5c.6-.2 1 .1.8.7L16.6 19.4c-.1.5-.4.6-.8.4l-5.2-3.8-2.4 2.3.4-3.8z"/>
+            </svg>
           </a>
         </div>
       </div>

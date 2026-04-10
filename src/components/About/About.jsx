@@ -1,123 +1,107 @@
-import { useState, useEffect, useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import './About.scss'
 
-function Counter({ target, suffix = '', duration = 2000 }) {
-  const [count, setCount] = useState(0)
-  const [isVisible, setIsVisible] = useState(false)
-  const counterRef = useRef(null)
+const stats = [
+  { value: 7, suffix: '+', label: 'Лет опыта' },
+  { value: 5000, suffix: '+', label: 'Клиентов' },
+  { value: 3, suffix: '', label: 'Мастера' },
+  { value: 4.9, suffix: '', label: 'Средний рейтинг', decimals: 1 }
+]
+
+function About() {
+  const sectionRef = useRef(null)
+  const [counters, setCounters] = useState(stats.map(() => 0))
+  const [started, setStarted] = useState(false)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !isVisible) {
-          setIsVisible(true)
+        if (entry.isIntersecting && !started) {
+          setStarted(true)
+          animateCounters()
         }
       },
-      { threshold: 0.5 }
+      { threshold: 0.3 }
     )
-
-    if (counterRef.current) {
-      observer.observe(counterRef.current)
-    }
-
+    if (sectionRef.current) observer.observe(sectionRef.current)
     return () => observer.disconnect()
-  }, [isVisible])
+  }, [])
 
-  useEffect(() => {
-    if (!isVisible) return
+  const animateCounters = () => {
+    stats.forEach((stat, idx) => {
+      const duration = 2000
+      const steps = 60
+      const interval = duration / steps
+      let step = 0
 
-    let startTime
-    const animate = (currentTime) => {
-      if (!startTime) startTime = currentTime
-      const progress = Math.min((currentTime - startTime) / duration, 1)
-      // Easing: cubic-bezier approximation
-      const eased = progress < 0.5
-        ? 4 * progress * progress * progress
-        : 1 - Math.pow(-2 * progress + 2, 3) / 2
-      setCount(Math.floor(eased * target))
-      if (progress < 1) {
-        requestAnimationFrame(animate)
-      }
-    }
-    requestAnimationFrame(animate)
-  }, [isVisible, target, duration])
+      const timer = setInterval(() => {
+        step++
+        const progress = step / steps
+        const eased = 1 - Math.pow(1 - progress, 3)
+        const current = stat.value * eased
+
+        setCounters(prev => {
+          const next = [...prev]
+          next[idx] = stat.decimals ? parseFloat(current.toFixed(stat.decimals)) : Math.floor(current)
+          return next
+        })
+
+        if (step >= steps) clearInterval(timer)
+      }, interval)
+    })
+  }
 
   return (
-    <div className="stat-item" ref={counterRef}>
-      <span className="stat-item__value">
-        {count}{suffix}
-      </span>
-    </div>
-  )
-}
-
-function About() {
-  return (
-    <section id="about" className="about scroll-offset">
+    <section id="about" className="about scroll-offset" ref={sectionRef}>
       <div className="container">
-        <div className="about__grid">
-          <div className="about__left">
-            <h2 className="about__title">Больше чем парикмахерская</h2>
-            <p className="about__text">
-              Barber & Co — это место, где традиции барберинга встречаются с современным стилем. 
-              Мы открылись в 2021 году с простой идеей: создать пространство, где каждый мужчина 
-              получит сервис премиум-класса по доступной цене.
-              <br /><br />
-              Наши мастера обучались в лучших академиях Европы, включая Vidal Sassoon в Лондоне. 
-              Мы используем только профессиональную косметику и инструменты премиум-класса. 
-              Каждый клиент для нас — это не просто стрижка, а опыт, который он заслуживает.
-              <br /><br />
-              Стерильность инструментов — наш приоритет. Автоклавы, одноразовые расходники, 
-              обработка поверхностей после каждого клиента. Ваш комфорт и безопасность на первом месте.
-            </p>
+        <header className="about__header">
+          <span className="section-label">О нас</span>
+          <h2 className="section-title">Больше чем барбершоп</h2>
+          <p className="section-subtitle">
+            Мы создаём пространство, где каждый мужчина чувствует себя уверенно
+          </p>
+        </header>
 
-            <div className="about__stats">
-              <div className="stat-item">
-                <Counter target={2500} suffix="+" />
-                <span className="stat-item__label">клиентов</span>
+        <div className="about__stats">
+          {stats.map((stat, i) => (
+            <div key={stat.label} className="about__stat">
+              <div className="about__stat-value">
+                {counters[i]}{stat.suffix}
               </div>
-              <div className="stat-item">
-                <Counter target={8} />
-                <span className="stat-item__label">мастеров</span>
-              </div>
-              <div className="stat-item">
-                <Counter target={4} />
-                <span className="stat-item__label">года в рынке</span>
-              </div>
+              <div className="about__stat-label">{stat.label}</div>
             </div>
+          ))}
+        </div>
+
+        <div className="about__features">
+          <div className="about__feature">
+            <div className="about__feature-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M9 12l2 2 4-4" strokeLinecap="round" strokeLinejoin="round"/>
+                <circle cx="12" cy="12" r="10"/>
+              </svg>
+            </div>
+            <h3>Стерильность</h3>
+            <p>Автоклав для стерилизации всех инструментов после каждого клиента</p>
           </div>
-
-          <div className="about__right">
-            <div className="about__photo">
-              <img
-                src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=600&h=700&fit=crop"
-                alt="Владелец барбершопа"
-                loading="lazy"
-              />
+          <div className="about__feature">
+            <div className="about__feature-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
             </div>
-
-            <div className="about__icons">
-              <div className="about__icon" data-tooltip="Сертификат Vidal Sassoon">
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                  <circle cx="20" cy="20" r="18" stroke="#B8860B" strokeWidth="2"/>
-                  <path d="M12 20l6 6 10-12" stroke="#B8860B" strokeWidth="2" strokeLinecap="round"/>
-                </svg>
-              </div>
-              <div className="about__icon" data-tooltip="Стерилизация автоклавом">
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                  <rect x="8" y="12" width="24" height="20" rx="2" stroke="#B8860B" strokeWidth="2"/>
-                  <path d="M12 12V8a8 8 0 0116 0v4" stroke="#B8860B" strokeWidth="2"/>
-                  <path d="M16 22h8" stroke="#B8860B" strokeWidth="2" strokeLinecap="round"/>
-                </svg>
-              </div>
-              <div className="about__icon" data-tooltip="Бесконтактная оплата">
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                  <rect x="6" y="10" width="28" height="20" rx="3" stroke="#B8860B" strokeWidth="2"/>
-                  <path d="M6 18h28" stroke="#B8860B" strokeWidth="2"/>
-                  <path d="M10 24h8" stroke="#B8860B" strokeWidth="2" strokeLinecap="round"/>
-                </svg>
-              </div>
+            <h3>Опыт</h3>
+            <p>Мастера с опытом более 5 лет и регулярным повышением квалификации</p>
+          </div>
+          <div className="about__feature">
+            <div className="about__feature-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <rect x="2" y="5" width="20" height="14" rx="2"/>
+                <path d="M2 10h20" strokeLinecap="round"/>
+              </svg>
             </div>
+            <h3>Удобная оплата</h3>
+            <p>Наличные, карты, СБП, Apple Pay, Google Pay — как вам удобно</p>
           </div>
         </div>
       </div>

@@ -1,235 +1,272 @@
 @import '../../styles/variables';
 
 .booking {
-  background: $graphite;
-  
-  .container {
-    @include container;
-  }
-  
-  &__title {
-    font-family: $font-headings;
-    font-weight: 700;
-    font-size: 40px;
-    color: $text-light;
+  padding: 100px 0;
+  background: $bg-primary;
+
+  &__header {
     text-align: center;
-    margin: 0 0 10px 0;
-    
-    @include mobile {
-      font-size: 32px;
+    margin-bottom: 40px;
+  }
+
+  &__steps {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 40px;
+  }
+
+  &__step {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: $radius-full;
+    font-size: 14px;
+    font-weight: 500;
+    color: $text-muted;
+    background: transparent;
+    border: 1px solid $border;
+    cursor: default;
+    @include transition(all, 0.2s);
+
+    &--active {
+      color: $btn-primary-text;
+      background: $accent;
+      border-color: $accent;
+      cursor: pointer;
+    }
+
+    &--done {
+      color: $text-secondary;
+      border-color: $border-hover;
+      cursor: pointer;
+
+      &:hover {
+        border-color: $accent;
+      }
+    }
+
+    &-num {
+      width: 22px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: $radius-full;
+      font-size: 12px;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    &--active &-num {
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    &--done &-num {
+      background: rgba(255, 255, 255, 0.06);
+      color: $accent;
     }
   }
-  
-  &__subtitle {
-    font-size: 18px;
-    color: $text-dark;
-    text-align: center;
-    margin: 0 0 40px 0;
-  }
-  
+
   &__grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    
-    @include mobile {
-      grid-template-columns: 1fr;
-    }
+    max-width: 560px;
+    margin: 0 auto;
   }
-  
-  &__calculator,
-  &__form {
-    background: rgba(36, 36, 36, 0.5);
-    border-radius: 24px;
-    padding: 30px;
+
+  &__panel {
+    background: $bg-card;
+    border: 1px solid $border;
+    border-radius: $radius-lg;
+    padding: 32px;
+    animation: fadeIn 0.3s ease;
   }
-  
+
   &__field {
     margin-bottom: 20px;
   }
-  
+
   &__label {
     display: block;
-    font-family: $font-primary;
+    font-size: 13px;
     font-weight: 500;
-    font-size: 14px;
-    color: $text-dark;
+    color: $text-secondary;
     margin-bottom: 8px;
   }
-  
+
   &__select,
-  &__input,
-  &__datepicker {
+  &__input {
     width: 100%;
     padding: 12px 16px;
-    background: $dark-bg;
-    border: 1px solid $border-light;
-    border-radius: 12px;
-    color: $text-light;
+    background: $bg-elevated;
+    border: 1px solid $border;
+    border-radius: $radius-md;
+    color: $text-primary;
     font-family: $font-primary;
-    font-size: 16px;
-    @include transition-default;
-    
+    font-size: 15px;
+    @include transition(border-color, 0.2s);
+
     &:focus {
       outline: none;
-      border-color: $brass;
-      box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.1);
+      border-color: $accent;
     }
-    
+
     &--error {
-      border-color: $error-red;
-      
-      &:focus {
-        box-shadow: 0 0 0 3px rgba(255, 68, 68, 0.1);
-      }
+      border-color: $error;
     }
   }
-  
+
   &__select {
     cursor: pointer;
-    
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M6 8L1 3h10z' fill='%23666'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 40px;
+
     option {
-      background: $dark-bg;
-      color: $text-light;
+      background: $bg-elevated;
+      color: $text-primary;
     }
   }
-  
+
   &__error {
     display: block;
     font-size: 12px;
-    color: $error-red;
-    margin-top: 5px;
+    color: $error;
+    margin-top: 6px;
   }
-  
+
   &__addons {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    padding: 16px;
+    background: $bg-elevated;
+    border-radius: $radius-md;
+    margin-bottom: 20px;
   }
-  
+
   &__addon {
     display: flex;
     align-items: center;
     gap: 10px;
     cursor: pointer;
     font-size: 14px;
-    color: $text-dark;
-    
+    color: $text-secondary;
+
+    span {
+      color: $text-primary;
+      font-weight: 500;
+
+      small {
+        color: $text-muted;
+        font-weight: 400;
+      }
+    }
+
     input[type="checkbox"] {
       width: 18px;
       height: 18px;
-      accent-color: $brass;
+      accent-color: $accent;
       cursor: pointer;
     }
   }
-  
+
   &__total {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 0;
-    border-top: 1px solid $border-light;
-    margin-top: 20px;
-    
-    &-label {
-      font-size: 18px;
-      color: $text-dark;
-    }
-    
-    &-price {
-      font-family: $font-primary;
-      font-weight: 700;
-      font-size: 32px;
-      color: $amber;
+    padding: 16px 0;
+    border-top: 1px solid $border;
+    font-size: 16px;
+    color: $text-secondary;
+
+    strong {
+      font-size: 24px;
+      color: $accent;
     }
   }
-  
-  &__submit {
-    width: 100%;
-    padding: 14px;
-    background: $btn-green;
-    color: $text-light;
-    border-radius: 30px;
-    font-family: $font-primary;
-    font-weight: 600;
-    font-size: 18px;
+
+  &__slots {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+    gap: 8px;
+  }
+
+  &__slot {
+    padding: 10px 8px;
+    border-radius: $radius-sm;
+    font-size: 13px;
+    font-weight: 500;
+    color: $text-secondary;
+    background: $bg-elevated;
+    border: 1px solid $border;
     cursor: pointer;
-    @include transition-default;
-    
-    &:hover:not(:disabled) {
-      background: $btn-green-hover;
-      transform: scale(1.02);
+    text-align: center;
+    @include transition(all, 0.2s);
+
+    &:hover {
+      border-color: $border-hover;
+      color: $text-primary;
     }
-    
-    &:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
+
+    &--active {
+      background: $accent;
+      color: $btn-primary-text;
+      border-color: $accent;
+    }
+
+    &--error {
+      border-color: $error;
+    }
+  }
+
+  &__nav {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  &__summary {
+    background: $bg-elevated;
+    border-radius: $radius-md;
+    padding: 20px;
+    margin-bottom: 24px;
+
+    &-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      font-size: 14px;
+      color: $text-secondary;
+
+      strong {
+        color: $text-primary;
+        font-weight: 500;
+      }
+    }
+
+    &-total {
+      border-top: 1px solid $border;
+      margin-top: 8px;
+      padding-top: 12px;
+
+      strong {
+        font-size: 20px;
+        color: $accent;
+      }
     }
   }
 
   &__submit-error {
-    background: rgba(255, 68, 68, 0.1);
-    border: 1px solid $error-red;
-    color: $error-red;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid $error;
+    color: $error;
     padding: 12px 16px;
-    border-radius: 12px;
+    border-radius: $radius-md;
     font-size: 14px;
     margin-bottom: 20px;
     text-align: center;
-  }
-}
-
-// Flatpickr overrides
-.flatpickr-calendar {
-  background: $dark-bg !important;
-  border: 1px solid $border-light !important;
-  box-shadow: $shadow-default !important;
-}
-
-.flatpickr-day {
-  color: $text-light !important;
-  
-  &:hover {
-    background: $brass !important;
-    border-color: $brass !important;
-  }
-  
-  &.selected {
-    background: $dark-red-btn !important;
-    border-color: $dark-red-btn !important;
-    
-    &:hover {
-      background: $dark-red-hover !important;
-    }
-  }
-  
-  &.today {
-    border-color: $brass !important;
-  }
-}
-
-.flatpickr-months {
-  .flatpickr-month {
-    background: $dark-bg !important;
-    color: $text-light !important;
-  }
-  
-  .flatpickr-prev-month,
-  .flatpickr-next-month {
-    fill: $text-light !important;
-    
-    &:hover svg {
-      fill: $brass !important;
-    }
-  }
-}
-
-span.flatpickr-weekday {
-  color: $text-dark !important;
-}
-
-.flatpickr-time {
-  input {
-    color: $text-light !important;
   }
 }

@@ -3,12 +3,11 @@ import './Hero.scss'
 
 function Hero() {
   const heroRef = useRef(null)
-  const [scrollY, setScrollY] = useState(0)
+  const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY)
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
+    const timer = setTimeout(() => setVisible(true), 100)
+    return () => clearTimeout(timer)
   }, [])
 
   const scrollToBooking = () => {
@@ -20,31 +19,40 @@ function Hero() {
 
   return (
     <section id="hero" className="hero" ref={heroRef}>
-      <div className="hero__bg"></div>
-      <div className="hero__overlay"></div>
+      <div className="hero__bg">
+        <div className="hero__gradient-1"></div>
+        <div className="hero__gradient-2"></div>
+        <div className="hero__gradient-3"></div>
+      </div>
+      <div className="hero__noise"></div>
 
-      <div
-        className="hero__content"
-        style={{ transform: `translateY(${scrollY * 0.2}px)` }}
-      >
+      <div className={`hero__content ${visible ? 'hero__content--visible' : ''}`}>
+        <p className="hero__label">Barbershop премиум-класса</p>
         <h1 className="hero__headline">
-          Острые лезвия. Точные линии. Чистота.
+          Острые лезвия.<br />
+          <span className="hero__headline-accent">Точные линии.</span><br />
+          Чистота.
         </h1>
-        <p className="hero__subheadline">
-          Мужские стрижки, бритьё опасной бритвой, уход за бородой от мастеров с 5+ годами опыта
+        <p className="hero__subtitle">
+          Мужские стрижки, бритьё опасной бритвой, уход за бородой<br />
+          от мастеров с опытом более 5 лет
         </p>
-        <button className="hero__cta" onClick={scrollToBooking}>
-          Выбрать мастера и время
-        </button>
+        <div className="hero__actions">
+          <button className="btn btn--primary btn--lg" onClick={scrollToBooking}>
+            Записаться онлайн
+          </button>
+          <a href="#services" className="btn btn--ghost btn--lg" onClick={(e) => {
+            e.preventDefault()
+            document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })
+          }}>
+            Услуги и цены
+          </a>
+        </div>
       </div>
 
-      <div className="hero__scroll-indicator">
-        <svg width="24" height="40" viewBox="0 0 24 40" fill="none">
-          <rect x="2" y="2" width="20" height="36" rx="10" stroke="#B8860B" strokeWidth="2"/>
-          <circle cx="12" cy="12" r="3" fill="#B8860B">
-            <animate attributeName="cy" values="12;24;12" dur="1.5s" repeatCount="indefinite"/>
-          </circle>
-        </svg>
+      <div className="hero__scroll">
+        <span className="hero__scroll-text">Scroll</span>
+        <div className="hero__scroll-line"></div>
       </div>
     </section>
   )

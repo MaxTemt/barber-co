@@ -5,38 +5,35 @@ import { faqItems } from '../../utils/data'
 function FAQ() {
   const [openIndex, setOpenIndex] = useState(null)
 
-  const toggle = (index) => {
-    setOpenIndex(openIndex === index ? null : index)
-  }
-
   return (
-    <section id="faq" className="faq scroll-offset">
+    <section className="faq scroll-offset">
       <div className="container">
-        <h2 className="faq__title">Часто задаваемые вопросы</h2>
+        <header className="faq__header">
+          <span className="section-label">FAQ</span>
+          <h2 className="section-title">Частые вопросы</h2>
+        </header>
 
         <div className="faq__list">
-          {faqItems.map((item, index) => (
-            <div key={index} className="faq-item">
-              <button
-                className="faq-item__question"
-                onClick={() => toggle(index)}
-                aria-expanded={openIndex === index}
-              >
+          {faqItems.map((item, i) => (
+            <div
+              key={i}
+              className={`faq-item ${openIndex === i ? 'faq-item--open' : ''}`}
+              onClick={() => setOpenIndex(openIndex === i ? null : i)}
+            >
+              <button className="faq-question">
                 <span>{item.question}</span>
                 <svg
-                  className={`faq-item__arrow ${openIndex === index ? 'faq-item__arrow--open' : ''}`}
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
                   fill="none"
+                  className={`faq-chevron ${openIndex === i ? 'faq-chevron--open' : ''}`}
                 >
-                  <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                  <path d="M5 7l5 5 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </button>
-              <div
-                className={`faq-item__answer ${openIndex === index ? 'faq-item__answer--open' : ''}`}
-              >
-                <p>{item.answer}</p>
+              <div className="faq-answer-wrapper">
+                <p className="faq-answer">{item.answer}</p>
               </div>
             </div>
           ))}

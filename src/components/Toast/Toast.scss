@@ -2,23 +2,25 @@
 
 .toast {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #323232;
-  color: $text-light;
-  padding: 12px 24px;
-  border-radius: 8px;
-  z-index: 4000;
+  bottom: 24px;
+  right: 24px;
+  background: $bg-card;
+  border: 1px solid $border;
+  color: $text-primary;
+  padding: 14px 24px;
+  border-radius: $radius-md;
+  z-index: 5000;
   opacity: 0;
-  transform: translateX(100%);
-  transition: all 200ms ease-out;
+  transform: translateY(20px);
+  @include transition(all, 0.3s);
+  box-shadow: $shadow-md;
+  font-size: 14px;
   display: flex;
   align-items: center;
-  box-shadow: $shadow-default;
-  font-size: 14px;
-  
+  gap: 10px;
+
   &.visible {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
   }
 }

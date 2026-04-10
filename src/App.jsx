@@ -21,7 +21,7 @@ function HomePage({ showToast }) {
       <Portfolio />
       <About />
       <Reviews />
-      <Booking onBookingSuccess={() => showToast('Заявка принята! Мы перезвоним за 15 минут')} />
+      <Booking onBookingSuccess={() => showToast('✓ Заявка принята! Мы перезвоним за 15 минут')} />
       <FAQ />
     </>
   )
@@ -48,10 +48,12 @@ function App() {
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       <Router>
         <Header />
-        <Routes>
-          <Route path="/" element={<HomePage showToast={showToast} />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <main>
+          <Routes>
+            <Route path="/" element={<HomePage showToast={showToast} />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
         <Footer />
         <Toast message={toastMessage} visible={toastVisible} />
       </Router>

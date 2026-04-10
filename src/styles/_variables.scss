@@ -1,49 +1,65 @@
 // ================== BREAKPOINTS ==================
 $breakpoints: (
-  mobile: 320px,
+  mobile: 480px,
   tablet: 768px,
   desktop: 1200px
 );
 
 // ================== CONTAINER ==================
-$container-max: 1140px;
-$container-padding: 20px;
-$gutters: 30px;
+$container-max: 1200px;
+$container-padding: 24px;
 
 // ================== FONTS ==================
-$font-primary: 'Roboto', sans-serif;
-$font-headings: 'Roboto Condensed', sans-serif;
+$font-primary: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+$font-headings: 'Roboto Condensed', 'Roboto', sans-serif;
 $font-size-base: 16px;
-$font-size-mobile: 14px;
-$line-height: 1.4;
+$line-height: 1.6;
 
-// ================== COLORS ==================
-$dark-bg: #1A1A1A;
-$graphite: #2C2C2C;
-$wenge: #3E2723;
-$brass: #B8860B;
-$amber: #FFBF00;
-$red-accent: #8B0000;
-$dark-red-btn: #9B1D1D;
-$dark-red-hover: #7A1515;
-$orange-grad-start: #FF8C00;
-$orange-grad-end: #FF4500;
-$btn-green: #2E7D32;
-$btn-green-hover: #1B5E20;
-$text-light: #FFFFFF;
-$text-dark: #E0E0E0;
-$gold-star: #FFD700;
-$error-red: #FF4444;
-$border-light: #444444;
-$card-bg: #242424;
-$modal-overlay: rgba(0,0,0,0.8);
-$shadow-default: 0 10px 20px rgba(0,0,0,0.2);
-$shadow-hover: 0 15px 25px rgba(0,0,0,0.3);
+// ================== COLORS — Dark Theme ==================
+$bg-primary: #0a0a0a;
+$bg-secondary: #111111;
+$bg-card: #1a1a1a;
+$bg-elevated: #222222;
 
-// Light theme
-$light-bg: #F5F5F5;
-$light-text: #1A1A1A;
-$light-cards: #FFFFFF;
+$accent: #c8a96e;
+$accent-light: #dfc08a;
+$accent-dark: #a08850;
+$accent-glow: rgba(200, 169, 110, 0.15);
+
+$text-primary: #f5f5f5;
+$text-secondary: #a0a0a0;
+$text-muted: #666666;
+
+$border: rgba(255, 255, 255, 0.06);
+$border-hover: rgba(255, 255, 255, 0.12);
+
+$btn-primary: #c8a96e;
+$btn-primary-hover: #dfc08a;
+$btn-primary-text: #0a0a0a;
+$btn-secondary: transparent;
+$btn-secondary-border: rgba(200, 169, 110, 0.4);
+
+$error: #ef4444;
+$success: #22c55e;
+
+$shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+$shadow-md: 0 8px 30px rgba(0, 0, 0, 0.4);
+$shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
+
+$radius-sm: 8px;
+$radius-md: 12px;
+$radius-lg: 20px;
+$radius-xl: 28px;
+$radius-full: 9999px;
+
+// ================== COLORS — Light Theme ==================
+$light-bg: #fafafa;
+$light-bg-secondary: #f0f0f0;
+$light-card: #ffffff;
+$light-text: #1a1a1a;
+$light-text-secondary: #666666;
+$light-border: rgba(0, 0, 0, 0.08);
+$light-border-hover: rgba(0, 0, 0, 0.15);
 
 // ================== MIXINS ==================
 @mixin mobile {
@@ -73,15 +89,39 @@ $light-cards: #FFFFFF;
 @mixin container {
   max-width: $container-max;
   margin: 0 auto;
-  padding: 60px $container-padding;
+  padding: 0 $container-padding;
 }
 
-@mixin flex-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+@mixin transition($property: all, $duration: 0.3s, $ease: cubic-bezier(0.4, 0, 0.2, 1)) {
+  transition: $property $duration $ease;
 }
 
-@mixin transition-default {
-  transition: all 200ms ease-out;
+@mixin glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid $border;
+}
+
+@mixin card-hover {
+  @include transition();
+  &:hover {
+    transform: translateY(-4px);
+    border-color: $border-hover;
+    box-shadow: $shadow-md;
+  }
+}
+
+@mixin heading-lg {
+  font-family: $font-headings;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+@mixin heading-md {
+  font-family: $font-headings;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
 }

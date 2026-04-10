@@ -1,6 +1,7 @@
 @import './variables';
 
-* {
+// ================== RESET & BASE ==================
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -9,65 +10,155 @@
 html {
   font-size: $font-size-base;
   scroll-behavior: smooth;
-  
-  @include mobile {
-    font-size: $font-size-mobile;
-  }
-  
-  @include small-mobile {
-    font-size: 14px;
-  }
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   font-family: $font-primary;
   line-height: $line-height;
-  color: $text-light;
-  background-color: $dark-bg;
+  color: $text-primary;
+  background-color: $bg-primary;
   overflow-x: hidden;
-  
-  &.light-theme {
+}
+
+// Light theme
+body.light-theme {
+  background-color: $light-bg;
+  color: $light-text;
+
+  .header {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom-color: $light-border;
+
+    .header__logo-text,
+    .header__nav-link {
+      color: $light-text;
+    }
+
+    .header__nav-link:hover {
+      color: $accent;
+    }
+
+    .header__hamburger-line {
+      background: $light-text !important;
+    }
+  }
+
+  .services,
+  .portfolio,
+  .about,
+  .reviews,
+  .booking,
+  .faq {
     background-color: $light-bg;
+  }
+
+  .section-label {
+    color: $accent-dark;
+  }
+
+  .section-title {
     color: $light-text;
-    
-    .header {
-      background-color: $light-cards;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      
-      .header__logo-text,
-      .header__nav-link {
-        color: $light-text;
-      }
-      
-      .header__nav-link:hover {
-        color: $brass;
-      }
+  }
+
+  .section-subtitle {
+    color: $light-text-secondary;
+  }
+
+  .service-card,
+  .portfolio-card,
+  .review-card,
+  .faq-item {
+    background-color: $light-card;
+    border-color: $light-border;
+
+    &:hover {
+      border-color: $light-border-hover;
     }
-    
-    .services,
-    .about,
-    .booking {
-      background-color: $light-bg;
-    }
-    
-    .service-card,
-    .review-card,
-    .faq-item {
-      background-color: $light-cards;
-      color: $light-text;
-    }
-    
-    .footer {
-      background-color: darken($light-bg, 10%);
-      color: $light-text;
-    }
+  }
+
+  .service-card__title,
+  .service-card__desc {
+    color: $light-text;
+  }
+
+  .service-card__desc {
+    color: $light-text-secondary;
+  }
+
+  .portfolio-card__overlay {
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+  }
+
+  .about__stat-value,
+  .about__stat-label {
+    color: $light-text;
+  }
+
+  .review-card__name,
+  .review-card__comment {
+    color: $light-text;
+  }
+
+  .review-card__comment {
+    color: $light-text-secondary;
+  }
+
+  .faq-question {
+    color: $light-text;
+  }
+
+  .faq-answer {
+    color: $light-text-secondary;
+  }
+
+  .booking__calculator,
+  .booking__form {
+    background-color: $light-card;
+    border-color: $light-border;
+  }
+
+  .booking__label {
+    color: $light-text-secondary;
+  }
+
+  .booking__select,
+  .booking__input,
+  .booking__datepicker {
+    background-color: $light-bg-secondary;
+    border-color: $light-border;
+    color: $light-text;
+  }
+
+  .booking__addon {
+    color: $light-text-secondary;
+  }
+
+  .booking__addon span {
+    color: $light-text;
+  }
+
+  .footer {
+    background-color: $bg-primary;
+    color: $text-primary;
+  }
+
+  .drawer {
+    background-color: $light-bg;
+  }
+
+  .drawer__link {
+    color: $light-text;
   }
 }
 
+// ================== TYPOGRAPHY ==================
 a {
   text-decoration: none;
   color: inherit;
-  @include transition-default;
+  @include transition();
 }
 
 ul {
@@ -79,7 +170,7 @@ button {
   background: none;
   cursor: pointer;
   font-family: inherit;
-  @include transition-default;
+  @include transition();
 }
 
 img {
@@ -93,7 +184,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
 }
 
-// Utility classes
+// ================== LAYOUT ==================
 .container {
   @include container;
 }
@@ -102,61 +193,114 @@ h1, h2, h3, h4, h5, h6 {
   text-align: center;
 }
 
-// Scroll offset for fixed header
+// Section spacing
+.section-label {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: $accent;
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-size: clamp(32px, 5vw, 52px);
+  color: $text-primary;
+  margin-bottom: 16px;
+  @include heading-lg();
+}
+
+.section-subtitle {
+  font-size: 18px;
+  color: $text-secondary;
+  max-width: 600px;
+}
+
 .scroll-offset {
-  scroll-margin-top: 80px;
+  scroll-margin-top: 100px;
 }
 
-// Smooth transitions for all interactive elements
-.service-card,
-.portfolio-card,
-.review-card,
-.faq-item {
-  @include transition-default;
+// ================== ANIMATIONS ==================
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-// Modal styles
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-in {
+  animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+// ================== MODAL ==================
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
-  background: $modal-overlay;
-  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
   z-index: 3000;
   display: flex;
   justify-content: center;
   align-items: center;
   opacity: 0;
   visibility: hidden;
-  transition: all 200ms ease-out;
-  
+  @include transition(all, 0.3s);
+
   &.active {
     opacity: 1;
     visibility: visible;
   }
-  
+
   .modal-content {
-    max-width: 80vw;
-    max-height: 80vh;
-    background: $dark-bg;
-    border-radius: 24px;
+    max-width: 85vw;
+    max-height: 85vh;
+    border-radius: $radius-lg;
     overflow: auto;
     position: relative;
-    
+
     .modal-close {
       position: absolute;
-      top: 20px;
-      right: 20px;
-      width: 32px;
-      height: 32px;
-      color: $text-light;
+      top: 16px;
+      right: 16px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: $radius-full;
+      color: $text-primary;
       cursor: pointer;
       z-index: 10;
-      
+      @include transition();
+
       &:hover {
-        color: $amber;
+        background: rgba(0, 0, 0, 0.8);
+        color: $accent;
       }
     }
   }
@@ -164,4 +308,30 @@ h1, h2, h3, h4, h5, h6 {
 
 body.modal-open {
   overflow: hidden;
+}
+
+// ================== TOAST ==================
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: $bg-card;
+  border: 1px solid $border;
+  color: $text-primary;
+  padding: 14px 24px;
+  border-radius: $radius-md;
+  z-index: 5000;
+  opacity: 0;
+  transform: translateY(20px);
+  @include transition(all, 0.3s);
+  box-shadow: $shadow-md;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

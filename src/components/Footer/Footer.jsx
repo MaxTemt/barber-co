@@ -13,101 +13,70 @@ function Footer() {
     <footer id="footer" className="footer">
       <div className="container">
         <div className="footer__grid">
-          {/* Контакты */}
-          <div className="footer__column">
-            <h4 className="footer__column-title">Контакты</h4>
-            <ul className="footer__list">
-              <li>
-                <a href="tel:+79991234567" className="footer__link">
-                  +7 999 123-45-67
-                </a>
-              </li>
-              <li>
-                <a href="https://wa.me/79991234567" target="_blank" rel="noopener noreferrer" className="footer__link">
-                  WhatsApp
-                </a>
-              </li>
-              <li>
-                <a href="https://t.me/barberco" target="_blank" rel="noopener noreferrer" className="footer__link">
-                  Telegram
-                </a>
-              </li>
-              <li>
-                <a href="mailto:email@barberco.ru" className="footer__link">
-                  email@barberco.ru
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Соцсети */}
-          <div className="footer__column">
-            <h4 className="footer__column-title">Соцсети</h4>
-            <div className="footer__socials">
-              <a href="https://instagram.com/barberco" target="_blank" rel="noopener noreferrer" className="footer__social">
-                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                  <rect x="4" y="4" width="24" height="24" rx="6" stroke="#CCCCCC" strokeWidth="2"/>
-                  <circle cx="16" cy="16" r="6" stroke="#CCCCCC" strokeWidth="2"/>
-                  <circle cx="23" cy="9" r="1.5" fill="#CCCCCC"/>
-                </svg>
-              </a>
-              <a href="https://tiktok.com/@barberco" target="_blank" rel="noopener noreferrer" className="footer__social">
-                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                  <path d="M22 8c-1.5 0-3-.5-4-1.5V18c0 4-3 7-7 7s-7-3-7-7 3-7 7-7c.5 0 1 0 1.5.1V7C8.5 7 5 10.5 5 15s3.5 8 8 8 8-3.5 8-8V12c2 1.5 4.5 2 7 2V8h-6z" fill="#CCCCCC"/>
-                </svg>
-              </a>
-              <a href="https://youtube.com/@barberco" target="_blank" rel="noopener noreferrer" className="footer__social">
-                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                  <rect x="2" y="8" width="28" height="16" rx="6" stroke="#CCCCCC" strokeWidth="2"/>
-                  <path d="M13 12v8l7-4-7-4z" fill="#CCCCCC"/>
-                </svg>
-              </a>
+          <div className="footer__col">
+            <div className="footer__logo">
+              <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
+                <path d="M8 4L24 28M24 4L8 28" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
+              </svg>
+              <span>BARBER & CO</span>
             </div>
-          </div>
-
-          {/* Карта */}
-          <div className="footer__column">
-            <h4 className="footer__column-title">Как нас найти</h4>
-            <div className="footer__map">
-              <iframe
-                src="https://yandex.ru/map-widget/v1/?ll=37.617698%2C55.755819&z=15&pt=37.617698%2C55.755819%2Cpm2rdm"
-                width="200"
-                height="120"
-                frameBorder="0"
-                allowFullScreen
-                loading="lazy"
-                title="Яндекс.Карта"
-              ></iframe>
-            </div>
-            <p className="footer__address">
-              Москва, ул. Тверская, 1
+            <p className="footer__desc">
+              Мужской барбершоп премиум-класса в Москве
             </p>
           </div>
 
-          {/* Ссылки */}
-          <div className="footer__column">
-            <h4 className="footer__column-title">Информация</h4>
-            <ul className="footer__list">
-              <li>
-                <a href="#" className="footer__link">Политика конфиденциальности</a>
-              </li>
-              <li>
-                <a href="#" className="footer__link">Публичная оферта</a>
-              </li>
+          <div className="footer__col">
+            <h4 className="footer__heading">Контакты</h4>
+            <ul className="footer__links">
+              <li><a href="tel:+79991234567">+7 999 123-45-67</a></li>
+              <li><a href="mailto:info@barberco.ru">info@barberco.ru</a></li>
+              <li>Москва, ул. Тверская, 1</li>
             </ul>
-            <button className="footer__theme-toggle" onClick={toggleTheme} aria-label="Переключить тему">
-              {theme === 'dark' ? '☀️ Светлая тема' : '🌙 Тёмная тема'}
-            </button>
+          </div>
+
+          <div className="footer__col">
+            <h4 className="footer__heading">Соцсети</h4>
+            <div className="footer__socials">
+              <a href="https://instagram.com/barberco" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                </svg>
+              </a>
+              <a href="https://t.me/barberco" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                </svg>
+              </a>
+              <a href="https://wa.me/79991234567" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div className="footer__col">
+            <h4 className="footer__heading">Время работы</h4>
+            <ul className="footer__links">
+              <li>Пн — Пт: 10:00 — 21:00</li>
+              <li>Сб: 10:00 — 20:00</li>
+              <li>Вс: 11:00 — 19:00</li>
+            </ul>
           </div>
         </div>
 
         <div className="footer__bottom">
           <p>© 2026 Barber & Co. Все права защищены.</p>
-          <button className="footer__to-top" onClick={scrollToTop}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M18 15l-6-6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-            </svg>
-          </button>
+          <div className="footer__bottom-actions">
+            <button className="footer__theme-btn" onClick={toggleTheme}>
+              {theme === 'dark' ? '☀️ Светлая' : '🌙 Тёмная'}
+            </button>
+            <button className="footer__to-top" onClick={scrollToTop} aria-label="Наверх">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M18 15l-6-6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </footer>

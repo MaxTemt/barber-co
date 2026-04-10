@@ -1,245 +1,255 @@
 @import '../../styles/variables';
 
 .header {
-  position: sticky;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 80px;
-  background: $dark-bg;
+  height: 72px;
+  background: transparent;
   z-index: 1000;
-  @include transition-default;
-  
+  @include transition(background, 0.3s);
+  border-bottom: 1px solid transparent;
+
   &--scrolled {
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
-    background: rgba(26, 26, 26, 0.95);
-    backdrop-filter: blur(10px);
+    background: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom-color: $border;
   }
-  
-  @include mobile {
-    height: 60px;
-  }
-  
+
   &__container {
-    max-width: $container-max;
-    margin: 0 auto;
+    @include container;
     height: 100%;
-    padding: 0 $container-padding;
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
-  
+
   &__logo {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     cursor: pointer;
-    @include transition-default;
-    
-    &:hover {
-      .header__logo-text {
-        color: $brass;
-      }
-    }
-    
+
     &-icon {
+      color: $accent;
       flex-shrink: 0;
     }
-    
+
     &-text {
-      font-family: $font-primary;
+      font-family: $font-headings;
       font-weight: 700;
-      font-size: 24px;
-      letter-spacing: 2px;
-      color: $text-light;
-      @include transition-default;
-      
+      font-size: 18px;
+      letter-spacing: 0.12em;
+      color: $text-primary;
+      @include transition();
+
       @include mobile {
-        font-size: 20px;
+        font-size: 16px;
       }
     }
   }
-  
+
   &__nav-list {
     display: flex;
-    gap: 30px;
-    
+    gap: 32px;
+
     @include mobile {
       display: none;
     }
   }
-  
+
   &__nav-link {
-    font-family: $font-primary;
+    font-size: 14px;
     font-weight: 500;
-    font-size: 16px;
-    color: $text-light;
-    position: relative;
-    padding-bottom: 4px;
-    @include transition-default;
-    
+    color: $text-secondary;
+    letter-spacing: 0.02em;
+    @include transition(color);
+
     &:hover {
-      color: $brass;
-    }
-    
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: $brass;
-      @include transition-default;
-    }
-    
-    &:hover::after {
-      width: 100%;
+      color: $text-primary;
     }
   }
-  
+
   &__actions {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 8px;
   }
-  
+
   &__theme-toggle {
     width: 40px;
     height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
-    @include transition-default;
-    
+    border-radius: $radius-full;
+    color: $text-secondary;
+    @include transition(all, 0.2s);
+
     &:hover {
-      background: rgba(184, 134, 11, 0.1);
+      background: rgba(255, 255, 255, 0.06);
+      color: $text-primary;
     }
   }
-  
+
   &__book-btn {
-    padding: 10px 24px;
-    background: $dark-red-btn;
-    color: $text-light;
-    border-radius: 30px;
-    font-family: $font-primary;
+    padding: 10px 22px;
+    background: $btn-primary;
+    color: $btn-primary-text;
+    border-radius: $radius-full;
+    font-size: 14px;
     font-weight: 600;
-    font-size: 16px;
-    @include transition-default;
-    
+    letter-spacing: 0.02em;
+    @include transition(all, 0.2s);
+
     &:hover {
-      background: $dark-red-hover;
+      background: $btn-primary-hover;
       transform: scale(1.02);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
-    
+
     @include mobile {
       display: none;
     }
   }
-  
+
   &__hamburger {
     display: none;
     flex-direction: column;
-    justify-content: space-between;
-    width: 24px;
-    height: 24px;
+    justify-content: center;
+    gap: 5px;
+    width: 32px;
+    height: 32px;
     cursor: pointer;
-    
+
     @include mobile {
       display: flex;
     }
-    
+
     &-line {
       width: 100%;
-      height: 3px;
-      background: $text-light;
+      height: 2px;
+      background: $text-primary;
       border-radius: 2px;
-      @include transition-default;
-      
-      &--active:nth-child(1) {
+      @include transition(all, 0.3s);
+      transform-origin: center;
+
+      &.active:nth-child(1) {
         transform: rotate(45deg) translate(5px, 5px);
       }
-      
-      &--active:nth-child(2) {
+
+      &.active:nth-child(2) {
         opacity: 0;
+        transform: scaleX(0);
       }
-      
-      &--active:nth-child(3) {
-        transform: rotate(-45deg) translate(7px, -6px);
+
+      &.active:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
       }
     }
   }
-  
-  &__drawer {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100vh;
-    background: $dark-bg;
-    z-index: 2000;
-    padding: 60px 20px;
+}
+
+// ================== DRAWER ==================
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: min(360px, 85vw);
+  height: 100vh;
+  background: $bg-secondary;
+  z-index: 3000;
+  padding: 80px 32px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transform: translateX(100%);
+  @include transition(transform, 0.4s, cubic-bezier(0.4, 0, 0.2, 1));
+
+  &--open {
+    transform: translateX(0);
+  }
+
+  &__close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $text-secondary;
+    cursor: pointer;
+    @include transition();
+
+    &:hover {
+      color: $text-primary;
+    }
+  }
+
+  &__list {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    transform: translateX(-100%);
-    @include transition-default;
-    
-    &--open {
-      transform: translateX(0);
+    gap: 4px;
+  }
+
+  &__link {
+    display: block;
+    font-size: 22px;
+    font-weight: 600;
+    color: $text-primary;
+    padding: 12px 0;
+    opacity: 0;
+    transform: translateX(20px);
+    animation: drawerSlideIn 0.3s ease forwards;
+    @include transition(color);
+
+    &:hover {
+      color: $accent;
     }
-    
-    &-close {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      width: 32px;
-      height: 32px;
-      color: $text-light;
-      cursor: pointer;
-      @include transition-default;
-      
-      &:hover {
-        color: $amber;
-      }
+  }
+
+  &__book-btn {
+    width: 100%;
+    padding: 16px;
+    background: $btn-primary;
+    color: $btn-primary-text;
+    border-radius: $radius-md;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    @include transition(all, 0.2s);
+
+    &:hover {
+      background: $btn-primary-hover;
     }
-    
-    &-list {
-      display: flex;
-      flex-direction: column;
-      gap: 30px;
+  }
+
+  &__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 2999;
+    opacity: 0;
+    visibility: hidden;
+    @include transition(all, 0.3s);
+
+    &--visible {
+      opacity: 1;
+      visibility: visible;
     }
-    
-    &-link {
-      font-family: $font-primary;
-      font-weight: 500;
-      font-size: 24px;
-      color: $text-light;
-      @include transition-default;
-      
-      &:hover {
-        color: $brass;
-      }
-    }
-    
-    &-book-btn {
-      width: 90%;
-      margin: 0 auto 40px;
-      padding: 14px 24px;
-      background: $dark-red-btn;
-      color: $text-light;
-      border-radius: 30px;
-      font-family: $font-primary;
-      font-weight: 600;
-      font-size: 18px;
-      @include transition-default;
-      
-      &:hover {
-        background: $dark-red-hover;
-      }
-    }
+  }
+}
+
+@keyframes drawerSlideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }

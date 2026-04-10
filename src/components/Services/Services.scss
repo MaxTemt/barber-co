@@ -1,242 +1,139 @@
 @import '../../styles/variables';
 
 .services {
-  background: $graphite;
-  
-  .container {
-    @include container;
-  }
-  
-  &__title {
-    font-family: $font-headings;
-    font-weight: 700;
-    font-size: 40px;
-    color: $text-light;
+  padding: 100px 0;
+  background: $bg-primary;
+
+  &__header {
     text-align: center;
-    margin: 0 0 10px 0;
-    
-    @include mobile {
-      font-size: 32px;
-    }
+    margin-bottom: 48px;
   }
-  
-  &__subtitle {
-    font-family: $font-primary;
-    font-size: 18px;
-    color: $text-dark;
-    text-align: center;
-    margin: 0 0 40px 0;
-    
-    @include mobile {
-      font-size: 16px;
-    }
-  }
-  
+
   &__chips {
     display: flex;
     justify-content: center;
-    gap: 15px;
-    margin-bottom: 40px;
     flex-wrap: wrap;
-    
-    @include mobile {
-      gap: 10px;
-    }
+    gap: 8px;
+    margin-bottom: 48px;
   }
-  
+
   &__chip {
     padding: 8px 20px;
-    border-radius: 40px;
-    background: transparent;
-    border: 1px solid $border-light;
-    color: $text-dark;
-    font-family: $font-primary;
+    border-radius: $radius-full;
     font-size: 14px;
+    font-weight: 500;
+    color: $text-secondary;
+    background: transparent;
+    border: 1px solid $border;
     cursor: pointer;
-    @include transition-default;
-    
+    @include transition(all, 0.2s);
+
     &:hover {
-      background: $amber;
-      color: $dark-bg;
+      color: $text-primary;
+      border-color: $border-hover;
     }
-    
+
     &--active {
-      background: $dark-red-btn;
-      border: none;
-      color: $text-light;
+      background: $accent;
+      color: $btn-primary-text;
+      border-color: $accent;
     }
   }
-  
+
   &__grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
-    
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+
     @include mobile {
-      display: none;
+      grid-template-columns: 1fr;
+      gap: 16px;
     }
-  }
-  
-  &__accordion {
-    @include mobile {
-      display: block;
-    }
-    display: none;
   }
 }
 
 .service-card {
-  background: $card-bg;
-  border-radius: 16px;
-  padding: 20px;
-  text-align: center;
-  @include transition-default;
-  
+  background: $bg-card;
+  border: 1px solid $border;
+  border-radius: $radius-lg;
+  padding: 32px 28px;
+  @include transition(all, 0.3s);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s ease forwards;
+
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: $shadow-hover;
-    
-    .service-card__btn {
-      background: $brass;
-      color: $dark-bg;
-    }
+    transform: translateY(-4px);
+    border-color: $border-hover;
+    box-shadow: $shadow-md;
   }
-  
+
   &__icon {
-    margin-bottom: 16px;
-    
-    svg {
-      width: 48px;
-      height: 48px;
-    }
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $accent-glow;
+    border-radius: $radius-md;
+    color: $accent;
+    margin-bottom: 20px;
   }
-  
+
   &__title {
-    font-family: $font-primary;
+    font-size: 18px;
     font-weight: 600;
-    font-size: 24px;
-    color: $text-light;
-    margin-bottom: 10px;
+    color: $text-primary;
+    margin-bottom: 8px;
   }
-  
+
   &__desc {
     font-size: 14px;
-    color: $text-dark;
-    margin-bottom: 15px;
-    line-height: 1.5;
+    color: $text-secondary;
+    line-height: 1.6;
+    margin-bottom: 20px;
   }
-  
-  &__price {
-    display: block;
-    font-family: $font-primary;
-    font-weight: 700;
-    font-size: 28px;
-    color: $amber;
-    margin-bottom: 5px;
-  }
-  
-  &__duration {
-    display: block;
-    font-size: 14px;
-    color: $text-dark;
-    margin-bottom: 16px;
-  }
-  
-  &__btn {
-    background: transparent;
-    border: 1px solid $brass;
-    border-radius: 30px;
-    padding: 8px 16px;
-    color: $brass;
-    font-family: $font-primary;
-    font-weight: 500;
-    font-size: 14px;
-    cursor: pointer;
-    @include transition-default;
-    
-    &:hover {
-      background: $brass;
-      color: $dark-bg;
-    }
-  }
-}
 
-.service-accordion {
-  &__item {
-    background: $card-bg;
-    border-radius: 16px;
-    margin-bottom: 16px;
-    overflow: hidden;
-  }
-  
-  &__summary {
-    padding: 20px;
-    font-family: $font-primary;
-    font-weight: 600;
-    font-size: 18px;
-    color: $text-light;
-    cursor: pointer;
+  &__meta {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    list-style: none;
-    
-    &::-webkit-details-marker {
-      display: none;
-    }
-    
-    &::after {
-      content: '▼';
-      font-size: 12px;
-      color: $text-dark;
-      @include transition-default;
-    }
-    
-    &[open]::after {
-      transform: rotate(180deg);
-    }
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid $border;
   }
-  
-  &__price {
-    font-weight: 700;
-    color: $amber;
-    font-size: 20px;
-  }
-  
-  &__content {
-    padding: 0 20px 20px;
-    font-size: 14px;
-    color: $text-dark;
-    
-    p {
-      margin-bottom: 10px;
-    }
-  }
-  
-  &__duration {
-    color: $text-dark;
-    margin-bottom: 15px;
-  }
-  
-  &__btn {
-    width: 100%;
-    padding: 10px;
-    background: $dark-red-btn;
-    color: $text-light;
-    border-radius: 30px;
-    font-family: $font-primary;
-    font-weight: 600;
-    cursor: pointer;
-    @include transition-default;
-    
-    &:hover {
-      background: $dark-red-hover;
-    }
-  }
-}
 
-.mobile-only {
-  @include mobile {
-    display: block !important;
+  &__price {
+    font-size: 22px;
+    font-weight: 700;
+    color: $text-primary;
+  }
+
+  &__duration {
+    font-size: 13px;
+    color: $text-muted;
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 12px;
+    border-radius: $radius-md;
+    font-size: 14px;
+    font-weight: 600;
+    color: $text-secondary;
+    background: transparent;
+    border: 1px solid $border;
+    cursor: pointer;
+    @include transition(all, 0.2s);
+
+    &:hover {
+      color: $text-primary;
+      border-color: $accent;
+      background: $accent-glow;
+    }
   }
 }
