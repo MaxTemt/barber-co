@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import '../src/styles/main.scss'
 import './NotFound.scss'
 
 function NotFound() {
@@ -18,15 +17,15 @@ function NotFound() {
           <path d="M20 25l10 10M100 25l-10 10" stroke="#B8860B" strokeWidth="2" strokeLinecap="round"/>
           <text x="60" y="100" textAnchor="middle" fill="#B8860B" fontSize="16" fontFamily="Roboto">Zzz...</text>
         </svg>
-        
+
         <h1 className="not-found__title">404</h1>
         <p className="not-found__subtitle">Барбер уснул с ножницами</p>
         <p className="not-found__text">
           Страница, которую вы ищете, не найдена. Возможно, она была удалена или перемещена.
         </p>
-        <a href="/" className="not-found__btn">
+        <Link to="/" className="not-found__btn">
           Подстричься обратно на главную
-        </a>
+        </Link>
       </div>
     </div>
   )

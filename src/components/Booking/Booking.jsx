@@ -14,6 +14,7 @@ function Booking({ onBookingSuccess }) {
   const [formData, setFormData] = useState({ name: '', phone: '', email: '' })
   const [errors, setErrors] = useState({})
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState('')
 
   const phoneRef = useRef(null)
 
@@ -78,7 +79,8 @@ function Booking({ onBookingSuccess }) {
     if (!validate()) return
     
     setIsSubmitting(true)
-    
+    setSubmitError('')
+
     try {
       const response = await fetch('/api/bookings', {
         method: 'POST',
@@ -110,6 +112,7 @@ function Booking({ onBookingSuccess }) {
       setErrors({})
     } catch (error) {
       console.error('Ошибка отправки:', error)
+      setSubmitError('Не удалось отправить заявку. Попробуйте позже или свяжитесь с нами по телефону.')
     } finally {
       setIsSubmitting(false)
     }
@@ -219,6 +222,7 @@ function Booking({ onBookingSuccess }) {
 
           {/* Форма */}
           <form className="booking__form" onSubmit={handleSubmit}>
+            {submitError && <div className="booking__submit-error">{submitError}</div>}
             <div className="booking__field">
               <label className="booking__label">Ваше имя</label>
               <input

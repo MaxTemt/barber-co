@@ -20,18 +20,8 @@ function Hero() {
 
   return (
     <section id="hero" className="hero" ref={heroRef}>
-      <div className="hero__video-container">
-        <video
-          className="hero__video"
-          autoPlay
-          loop
-          muted
-          playsInline
-        >
-          <source src="/hero_video.mp4" type="video/mp4" />
-        </video>
-        <div className="hero__overlay"></div>
-      </div>
+      <div className="hero__bg"></div>
+      <div className="hero__overlay"></div>
 
       <div
         className="hero__content"

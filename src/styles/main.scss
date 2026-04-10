@@ -115,26 +115,6 @@ h1, h2, h3, h4, h5, h6 {
   @include transition-default;
 }
 
-// Toast notification styles
-.toast {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #323232;
-  color: $text-light;
-  padding: 12px 24px;
-  border-radius: 8px;
-  z-index: 4000;
-  opacity: 0;
-  transform: translateX(100%);
-  transition: all 200ms ease-out;
-  
-  &.visible {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
 // Modal styles
 .modal-overlay {
   position: fixed;

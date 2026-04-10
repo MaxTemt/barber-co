@@ -102,7 +102,7 @@ function Footer() {
         </div>
 
         <div className="footer__bottom">
-          <p>© 2025 Barber & Co. Все права защищены.</p>
+          <p>© 2026 Barber & Co. Все права защищены.</p>
           <button className="footer__to-top" onClick={scrollToTop}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
               <path d="M18 15l-6-6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
