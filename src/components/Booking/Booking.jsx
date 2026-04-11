@@ -182,7 +182,7 @@ function Booking({ onBookingSuccess }) {
               </div>
 
               <div className="booking__nav--full">
-                <button className="btn btn--primary btn--full" onClick={() => setStep(2)}>
+                <button className="btn btn--primary btn--full btn--md" onClick={() => setStep(2)}>
                   Далее
                 </button>
               </div>
@@ -222,8 +222,8 @@ function Booking({ onBookingSuccess }) {
               </div>
 
               <div className="booking__nav">
-                <button className="btn btn--ghost" onClick={() => setStep(1)}>Назад</button>
-                <button className="btn btn--primary" onClick={() => { if (selectedDate && selectedTime) setStep(3); else setErrors({ date: !selectedDate ? 'Выберите дату' : '', time: !selectedTime ? 'Выберите время' : '' }) }}>
+                <button className="btn btn--ghost btn--md" onClick={() => setStep(1)}>Назад</button>
+                <button className="btn btn--primary btn--md" onClick={() => { if (selectedDate && selectedTime) setStep(3); else setErrors({ date: !selectedDate ? 'Выберите дату' : '', time: !selectedTime ? 'Выберите время' : '' }) }}>
                   Далее
                 </button>
               </div>
@@ -307,8 +307,8 @@ function Booking({ onBookingSuccess }) {
                 </div>
 
                 <div className="booking__nav">
-                  <button type="button" className="btn btn--ghost" onClick={() => setStep(2)}>Назад</button>
-                  <button type="submit" className="btn btn--primary" disabled={isSubmitting}>
+                  <button type="button" className="btn btn--ghost btn--md" onClick={() => setStep(2)}>Назад</button>
+                  <button type="submit" className="btn btn--primary btn--md" disabled={isSubmitting}>
                     {isSubmitting ? 'Отправка...' : 'Отправить заявку'}
                   </button>
                 </div>
