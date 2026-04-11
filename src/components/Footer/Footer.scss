@@ -108,16 +108,7 @@
       display: flex;
       align-items: center;
       gap: 12px;
-    }
-  }
-
-  &__theme-btn {
-    font-size: 13px;
-    color: $text-secondary;
-    @include transition(color, 0.2s);
-
-    &:hover {
-      color: $text-primary;
+      justify-content: center;
     }
   }
 

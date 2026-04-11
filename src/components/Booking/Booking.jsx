@@ -181,9 +181,11 @@ function Booking({ onBookingSuccess }) {
                 <strong>{totalPrice.toLocaleString()} ₽</strong>
               </div>
 
-              <button className="btn btn--primary" onClick={() => setStep(2)} style={{ width: '100%', marginTop: 16 }}>
-                Далее
-              </button>
+              <div className="booking__nav--full">
+                <button className="btn btn--primary btn--full" onClick={() => setStep(2)}>
+                  Далее
+                </button>
+              </div>
             </div>
           )}
 

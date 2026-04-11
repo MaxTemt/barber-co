@@ -52,15 +52,6 @@ $radius-lg: 20px;
 $radius-xl: 28px;
 $radius-full: 9999px;
 
-// ================== COLORS — Light Theme ==================
-$light-bg: #fafafa;
-$light-bg-secondary: #f0f0f0;
-$light-card: #ffffff;
-$light-text: #1a1a1a;
-$light-text-secondary: #666666;
-$light-border: rgba(0, 0, 0, 0.08);
-$light-border-hover: rgba(0, 0, 0, 0.15);
-
 // ================== MIXINS ==================
 @mixin mobile {
   @media (max-width: map-get($breakpoints, tablet)) {

@@ -1,4 +1,4 @@
-import { useState, useEffect, useReducer } from 'react'
+import { useState, useEffect } from 'react'
 import { HashRouter as Router, Routes, Route } from 'react-router-dom'
 import Header from './components/Header/Header'
 import Hero from './components/Hero/Hero'
@@ -11,7 +11,6 @@ import FAQ from './components/FAQ/FAQ'
 import Footer from './components/Footer/Footer'
 import Toast from './components/Toast/Toast'
 import NotFound from './NotFound'
-import { ThemeContext, themeReducer } from './utils/themeContext'
 
 function HomePage({ showToast }) {
   return (
@@ -28,11 +27,8 @@ function HomePage({ showToast }) {
 }
 
 function App() {
-  const [theme, dispatchTheme] = useReducer(themeReducer, 'dark')
   const [toastVisible, setToastVisible] = useState(false)
   const [toastMessage, setToastMessage] = useState('')
-
-  const toggleTheme = () => dispatchTheme({ type: 'TOGGLE' })
 
   const showToast = (message) => {
     setToastMessage(message)
@@ -40,24 +36,18 @@ function App() {
     setTimeout(() => setToastVisible(false), 4000)
   }
 
-  useEffect(() => {
-    document.body.className = theme === 'light' ? 'light-theme' : ''
-  }, [theme])
-
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <Router>
-        <Header />
-        <main>
-          <Routes>
-            <Route path="/" element={<HomePage showToast={showToast} />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </main>
-        <Footer />
-        <Toast message={toastMessage} visible={toastVisible} />
-      </Router>
-    </ThemeContext.Provider>
+    <Router>
+      <Header />
+      <main>
+        <Routes>
+          <Route path="/" element={<HomePage showToast={showToast} />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </main>
+      <Footer />
+      <Toast message={toastMessage} visible={toastVisible} />
+    </Router>
   )
 }
 

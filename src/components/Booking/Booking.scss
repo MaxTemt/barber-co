@@ -226,6 +226,11 @@
     display: flex;
     gap: 12px;
     margin-top: 24px;
+
+    &--full {
+      display: block;
+      margin-top: 16px;
+    }
   }
 
   &__summary {

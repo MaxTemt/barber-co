@@ -1,13 +1,11 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import './Header.scss'
-import { ThemeContext } from '../../utils/themeContext'
 
 const navItems = ['Главная', 'Услуги', 'Портфолио', 'О нас', 'Отзывы', 'Контакты']
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const { theme, toggleTheme } = useContext(ThemeContext)
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20)
@@ -82,18 +80,6 @@ function Header() {
           </nav>
 
           <div className="header__actions">
-            <button className="header__theme-toggle" onClick={toggleTheme} aria-label="Переключить тему">
-              {theme === 'dark' ? (
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <circle cx="12" cy="12" r="4"/>
-                  <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                </svg>
-              ) : (
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-                </svg>
-              )}
-            </button>
             <button className="header__book-btn" onClick={scrollToBooking}>
               Записаться
             </button>
@@ -106,7 +92,6 @@ function Header() {
         </div>
       </header>
 
-      {/* Mobile Drawer */}
       <div className={`drawer ${menuOpen ? 'drawer--open' : ''}`}>
         <button className="drawer__close" onClick={() => setMenuOpen(false)} aria-label="Закрыть">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -133,7 +118,6 @@ function Header() {
         </button>
       </div>
 
-      {/* Overlay */}
       <div className={`drawer__overlay ${menuOpen ? 'drawer__overlay--visible' : ''}`} onClick={() => setMenuOpen(false)} />
     </>
   )
